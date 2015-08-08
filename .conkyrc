@@ -35,19 +35,14 @@ gap_y 20
 minimum_size 220 1000
 maximum_width 220
 
-# default_bar_size 250 8
-
 #########################
 # - Graphics settings - #
 #########################
 draw_shades no
 
-# default_color cccccc
-
 color0 white
 color1 E07A1F
 color2 white
-
 
 TEXT
 SYSTEM ${hr 2}
@@ -101,8 +96,6 @@ ${voffset 4}${fs_free /}/${fs_size /} ${alignr}${fs_bar 8,60 /}
 ${voffset 1}
 ${font conkycolors:size=16}i${font} ${voffset -5}Home
 ${voffset 4}${fs_free /home}/${fs_size /home} ${alignr}${fs_bar 8,60 /home}
-#${font conkycolors:size=16}i${font} ${voffset -5}Windows 7
-#${voffset 4}${fs_free /media/windows7}/${fs_size /media/windows7} ${alignr}${fs_bar 8,60 /media/windows7}
 
 Network ${hr 2}
 ${voffset 0.1}
