@@ -31,7 +31,7 @@ own_window_argb_value 200
 
 alignment top_left
 gap_x 1950
-gap_y 40
+gap_y 20
 minimum_size 220 1000
 maximum_width 220
 
@@ -57,31 +57,32 @@ ${goto 55}Kernel: ${kernel}
 ${font Arial Black:size=22}${alignc}${time %H:%M}${font}
 ${alignc}${time %A, %B %d, %Y}
 
-${hr 2}
-
-CPU Freq ${hr 2}
-${goto 6}${voffset 4}${font conkycolors:size=16}E${font}${voffset -4}${goto 32}Frequency: ${alignr}${freq_g (1)} GHz
-
-
-CPU Usage ${hr 2}
-${goto 6}${voffset 4}${font conkycolors:size=16}c${font}${voffset -4}${goto 32}CPU1: ${cpu cpu1}%${alignr}CPU2: ${cpu cpu2}%
-${goto 6}${voffset 4}${font conkycolors:size=16}c${font}${voffset -4}${goto 32}CPU3: ${cpu cpu3}%${alignr}CPU4: ${cpu cpu4}%
-${goto 6}${voffset 4}${font conkycolors:size=16}c${font}${voffset -4}${goto 32}CPU5: ${cpu cpu5}%${alignr}CPU6: ${cpu cpu6}%
-${goto 6}${voffset 4}${font conkycolors:size=16}c${font}${voffset -4}${goto 32}CPU7: ${cpu cpu7}%${alignr}CPU8: ${cpu cpu8}%
+CPU ${hr 2}
+${goto 45}${color #53D5F6}${execi 30grep 'model name' /proc/cpuinfo | sed -e 's/model name.*: //'| uniq | cut -c 1-26} $color
+${goto 6}${voffset 4}${font conkycolors:size=16}d${font}${voffset -4}${goto 32}Frequency: ${alignr}${freq_g (1)} GHz
+${goto 6}${voffset 4}${font conkycolors:size=16}l${font}${voffset -4}${goto 32}CPU1: ${cpu cpu1}%${alignr}CPU2: ${cpu cpu2}%
+${goto 6}${voffset 4}${font conkycolors:size=16}l${font}${voffset -4}${goto 32}CPU3: ${cpu cpu3}%${alignr}CPU4: ${cpu cpu4}%
+${goto 6}${voffset 4}${font conkycolors:size=16}l${font}${voffset -4}${goto 32}CPU5: ${cpu cpu5}%${alignr}CPU6: ${cpu cpu6}%
+${goto 6}${voffset 4}${font conkycolors:size=16}l${font}${voffset -4}${goto 32}CPU7: ${cpu cpu7}%${alignr}CPU8: ${cpu cpu8}%
 
 CPU Temperatures ${hr 2}
-${goto 6}${voffset 4}${font conkycolors:size=16}c${font}${voffset -4}${goto 32}Core0:${alignr}${color #FCAF3E}${execi 30 sensors | grep 'Core 0' | awk '{print $3}' | sed 's/+//' | sed 's/\.0//g'} $color
-${goto 6}${voffset 4}${font conkycolors:size=16}c${font}${voffset -4}${goto 32}Core1:${alignr}${color #FCAF3E}${execi 30 sensors | grep 'Core 1' | awk '{print $3}' | sed 's/+//' | sed 's/\.0//g'} $color
-${goto 6}${voffset 4}${font conkycolors:size=16}c${font}${voffset -4}${goto 32}Core2:${alignr}${color #FCAF3E}${execi 30 sensors | grep 'Core 2' | awk '{print $3}' | sed 's/+//' | sed 's/\.0//g'} $color
-${goto 6}${voffset 4}${font conkycolors:size=16}c${font}${voffset -4}${goto 32}Core3:${alignr}${color #FCAF3E}${execi 30 sensors | grep 'Core 3' | awk '{print $3}' | sed 's/+//' | sed 's/\.0//g'} $color
+${goto 6}${voffset 4}${font conkycolors:size=16}8${font}${voffset -4}${goto 32}Core0:${alignr}${color #FCAF3E}${execi 30 sensors | grep 'Core 0' | awk '{print $3}' | sed 's/+//' | sed 's/\.0//g'} $color
+${goto 6}${voffset 4}${font conkycolors:size=16}8${font}${voffset -4}${goto 32}Core1:${alignr}${color #FCAF3E}${execi 30 sensors | grep 'Core 1' | awk '{print $3}' | sed 's/+//' | sed 's/\.0//g'} $color
+${goto 6}${voffset 4}${font conkycolors:size=16}8${font}${voffset -4}${goto 32}Core2:${alignr}${color #FCAF3E}${execi 30 sensors | grep 'Core 2' | awk '{print $3}' | sed 's/+//' | sed 's/\.0//g'} $color
+${goto 6}${voffset 4}${font conkycolors:size=16}8${font}${voffset -4}${goto 32}Core3:${alignr}${color #FCAF3E}${execi 30 sensors | grep 'Core 3' | awk '{print $3}' | sed 's/+//' | sed 's/\.0//g'} $color
 
-Misc Info ${hr 2}
-${goto 6}${voffset 4}${font conkycolors:size=16}d${font}${voffset -4}${goto 32}GPU Temp: ${alignr}${color #FCAF3E}${exec nvidia-settings -q GPUCoreTemp | grep Attribute | cut -d ' ' -f 6 | cut -c 1-2} °C$color
+GPU ${hr 2}
+${goto 6}${voffset 4}${font conkycolorslogos:size=16}n${font}${voffset -4}${goto 32}${exec nvidia-smi --query-gpu=name --format=csv,noheader}${alignr}${color #FCAF3E}${exec nvidia-smi --query-gpu=driver_version --format=csv,noheader} $color
+${goto 6}${voffset 4}${font conkycolors:size=16}8${font}${voffset -4}${goto 32}Temperature: ${alignr}${color #FCAF3E}${exec nvidia-settings -q GPUCoreTemp | grep Attribute | cut -d ' ' -f 6 | cut -c 1-2} °C$color
+${goto 6}${voffset 4}${font conkycolors:size=16}e${font}${voffset -4}${goto 32}Memory:${alignr}${exec nvidia-smi --query-gpu=memory.used --format=csv,noheader} / ${exec nvidia-smi --query-gpu=memory.total --format=csv,noheader}
+
+General ${hr 2}
 ${goto 6}${voffset 4}${font conkycolors:size=16}g${font}${voffset -4}${goto 32}Mem: ${mem} ${alignr}${membar 8,60}
 ${goto 6}${voffset 4}${font conkycolors:size=16}i${font}${voffset -4}${goto 32}Disk: ${diskio}${alignr}${diskiograph 8,60 F57900 FCAF3E}
 ${goto 6}${voffset 4}${font conkycolors:size=16}i${font}${voffset -4}${goto 32}Swap: $swapperc% ${alignr}${swapbar 8,60}
 ${goto 6}${voffset 4}${font conkycolors:size=16}o${font}${voffset -4}${goto 32}Uptime: ${alignr}${uptime}
 ${goto 6}${voffset 4}${font conkycolors:size=16}C${font}${voffset -4}${goto 32}Processes: ${alignr}$processes ($running_processes running)
+${voffset 4}${goto 32}Threads: ${alignr}$threads ($running_threads running)
 
 ${goto 7.5}${voffset 4}${font Poky:size=15}a${font}${goto 32}${voffset -10}Highest: ${alignr 13}CPU${alignr}RAM
 ${goto 32}${voffset -5.5}${hr 1}
@@ -109,9 +110,9 @@ ${if_up eno1}
 ${voffset -13}${font conkycolors:size=14}x${font}${goto 32}${voffset -6}Up: ${upspeed eno1}${font} ${alignr}${upspeedgraph eno1 8,60 F57900 FCAF3E}
 ${goto 32}Total: ${totalup eno1}
 ${voffset 1}
-${voffset -2}${font conkycolors:size=14}u${font}${goto 32}${voffset -6}Down: ${downspeed eno1}${font} ${alignr}${downspeedgraph eno1 8,60 F57900 FCAF3E}
+${voffset -2}${font conkycolors:size=14}w${font}${goto 32}${voffset -6}Down: ${downspeed eno1}${font} ${alignr}${downspeedgraph eno1 8,60 F57900 FCAF3E}
 ${goto 32}Total: ${totaldown eno1}
 ${voffset 1}
-${voffset -2}${font conkycolors:size=13}A${font}${goto 32}${voffset -4}Local IP: ${alignr}${addr eno1}
+# ${voffset -2}${font conkycolors:size=13}A${font}${goto 32}${voffset -4}Local IP: ${alignr}${addr eno1}
 ${endif}
 
